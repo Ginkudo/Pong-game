@@ -22,5 +22,40 @@ paddle_b.shapesize(stretch_wid=5, stretch_len=1)
 paddle_b.penup()
 paddle_b.goto(350, 0)
 
+ball = turtle.Turtle() #creates the ball
+ball.speed(0)
+ball.shape("square")
+ball.color("white")
+ball.penup()
+ball.goto(0, 0)
+ball.dx = 0.1
+ball.dy = 0.1
+
+def paddle_a_up(): #function to move the left paddle up
+    y = paddle_a.ycor()
+    y += 20
+    paddle_a.sety(y)
+
+def paddle_a_down(): #function to move the left paddle down
+    y = paddle_a.ycor()
+    y -= 20
+    paddle_a.sety(y)
+
+def paddle_b_up(): #function to move the right paddle up
+    y = paddle_b.ycor()
+    y += 20
+    paddle_b.sety(y)
+
+def paddle_b_down(): #function to move the right paddle down
+    y = paddle_b.ycor()
+    y -= 20
+    paddle_b.sety(y)
+
+wn.listen() #tells the window to listen for keyboard input
+wn.onkeypress(paddle_a_up, "w") #binds the "w" key
+wn.onkeypress(paddle_a_down, "s") #binds the "s" key
+wn.onkeypress(paddle_b_up, "Up") #binds the "Up" arrow key
+wn.onkeypress(paddle_b_down, "Down") #binds the "Down" arrow key
+
 while True: #main game loop
     wn.update()
