@@ -28,8 +28,10 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 2
-ball.dy = -2
+ball.dx = 0.2
+ball.dy = -0.2
+
+
 
 def paddle_a_up(): #function to move the left paddle up
     y = paddle_a.ycor()
@@ -59,8 +61,10 @@ wn.onkeypress(paddle_b_down, "Down") #binds the "Down" arrow key
 
 while True: #main game loop
     wn.update()
-    ball.setx(ball.xcor() + ball.dx) #moves the ball
-    ball.sety(ball.ycor() + ball.dy)
+
+    ball.setx(ball.xcor() + ball.dx) #moves the ball in the x direction
+    ball.sety(ball.ycor() + ball.dy) #moves the ball in the y direction
+    
     if ball.ycor() > 290: #checks for collision with the top wall
         ball.sety(290)
         ball.dy *= -1
@@ -72,4 +76,11 @@ while True: #main game loop
         ball.dx *= -1
     if ball.xcor() < -390: #checks for collision with the left wall
         ball.goto(0, 0)
+        ball.dx *= -1
+
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40): #checks for collision with the right paddle
+        ball.setx(340)
+        ball.dx *= -1
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40): #checks for collision with the left paddle
+        ball.setx(-340)
         ball.dx *= -1
