@@ -6,6 +6,9 @@ wn.bgcolor("black")
 wn.setup(width=800, height=600)
 wn.tracer(0) 
 
+score_a = 0 #initializes the score for player 1
+score_b = 0 #initializes the score for player 2
+
 paddle_a = turtle.Turtle() #creates the left paddle for player 1
 paddle_a.speed(0)
 paddle_a.shape("square")
@@ -31,6 +34,13 @@ ball.goto(0, 0)
 ball.dx = 0.2
 ball.dy = -0.2
 
+pen = turtle.Turtle() #creates a pen to write the score
+pen.speed(0)
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
 
 
 def paddle_a_up(): #function to move the left paddle up
@@ -74,9 +84,15 @@ while True: #main game loop
     if ball.xcor() > 390: #checks for collision with the right wall
         ball.goto(0, 0)
         ball.dx *= -1
+        score_a += 1
+        pen.clear()
+        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
     if ball.xcor() < -390: #checks for collision with the left wall
         ball.goto(0, 0)
         ball.dx *= -1
+        score_b += 1
+        pen.clear()
+        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40): #checks for collision with the right paddle
         ball.setx(340)
